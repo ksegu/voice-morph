@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1043178554737-ulse1lmhj0u3bu7r5gkc9e1rgg6itm9g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1043178554737-ulse1lmhj0u3bu7r5gkc9e1rgg6itm9g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA1bYAiDoUAOSxGOKHfhPe2BeOIA2q8hfY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1043178554737</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.umd.segu.VoiceMorph</string>
+	<key>PROJECT_ID</key>
+	<string>fire1-cb8e5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fire1-cb8e5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1043178554737:ios:6782cf8ca45254f4</string>
+	<key>DATABASE_URL</key>
+	<string>https://fire1-cb8e5.firebaseio.com</string>
+</dict>
+</plist>
