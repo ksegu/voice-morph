@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import FirebaseStorage
 import Firebase
 class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     
@@ -17,12 +18,21 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
     
+    
+    var recordingName = "";
+    var filePath = URL(string: "");
+    var loc = ""
+    var uploadTask: StorageUploadTask? = nil;
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
         stopRecordingButton.isEnabled = false
+    
+
     }
     
     
@@ -30,6 +40,10 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewWillAppear(animated)
         print("view will appear called")
         
+    }
+    
+    func getData() -> StorageUploadTask {
+        return uploadTask!;
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -42,15 +56,16 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.isEnabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-//
-//        let currentDateTime = NSDate()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = "recordedVoice.wav"
-            //formatter.string(from: currentDateTime as Date)+".wav"
+
+        recordingName = NSUUID().uuidString + ".wav";
+        
+        // recordingName = "recordedAudio.wav";
         let pathArray = [dirPath, recordingName]
-        let filePath = URL(string: pathArray.joined(separator: "/"))
-        print(filePath!)
+        
+        loc = pathArray.joined(separator: "/")
+        
+        filePath = URL(string: pathArray.joined(separator: "/"))!
+        // print(filePath!)
         
         //Setup audio session
         let session = AVAudioSession.sharedInstance()
@@ -71,8 +86,6 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         recordingLabel.text = "Tap to Start Recording"
         audioRecorder.stop()
         
-        
-        
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
@@ -82,25 +95,41 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
             let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
             
             saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
-              //  let id = self.audioRecorder.url
+                //var ref: DatabaseReference!
+
+               // ref = Database.database().reference()
+                // _ = self.audioRecorder.url
+                //You'll get unique audioFile name
+               
+
+                let databaseRef = Database.database().reference().child("sounds")
+                
+                databaseRef.childByAutoId().setValue(["name" : self.recordingName])
+                let currentDateTime = NSDate()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MM-dd-yyyy"
+                databaseRef.childByAutoId().setValue(["date" :  formatter.string(from: currentDateTime as Date)])
                 
                 
-//                let audioName = NSUUID().uuidString //You'll get unique audioFile name
-//                let storageRef = Storage.storage().reference().child("audio").child(audioName)
-//                let metadata  = StorageMetadata()
+                let storageRef = Storage.storage().reference().child("sounds")
+//                let myMetadata  = StorageMetadata()
 //                metadata.contentType = "audio/wav"
-//                if let uploadData = AVFileType(self.recordedVoice.wav!) {
-//
-//                    storageRef.putData(uploadData, metadata: metadata) { (metadata, err) in
-//                        if err != nil {
-//                            //print(err)
-//                            return
-//                        }
-//                        if let _ = metadata?.downloadURL()?.absoluteString {
-//                            print("uploading done!")
-//                        }
-//                    }
+                let uploadRef = storageRef.child(self.recordingName)
+                self.uploadTask = uploadRef.putFile(from: URL(string: "file://" + self.loc)!, metadata: nil) { (metadata, error) in
+//                    print("UPLOAD TASK FINISHED")
+//                    print(metadata ?? "NO METADATA")
+//                    print(error ?? "NO ERROR")
+                }
+                self.uploadTask?.observe(.progress) { (snapshot) in
+//                    print(snapshot.progress ?? "no more progress")
+                    
+                }
+//                uploadTask.observe(.progress) { (snapshot) in
+//                    print(snapshot.progress ?? "no more progress")
 //                }
+//
+//                 uploadTask.resume()
+//
                 
                 self.performSegue(withIdentifier: "stopRecording", sender: self.audioRecorder.url)
             }))
@@ -114,7 +143,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
             present(saveAlert, animated: true, completion: nil)
             
         } else {
-            print("recording was not saved")
+//            print("recording was not saved")
         }
     }
     

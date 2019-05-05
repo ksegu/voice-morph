@@ -14,6 +14,7 @@
 		1A793527226B746F008FC1C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A793525226B746F008FC1C7 /* LaunchScreen.storyboard */; };
 		1A79352F226BDADA008FC1C7 /* PlayEffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A79352E226BDADA008FC1C7 /* PlayEffectsViewController.swift */; };
 		1A793532226BF5A2008FC1C7 /* PlayEffectsViewController+Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A793530226BF44C008FC1C7 /* PlayEffectsViewController+Audio.swift */; };
+		1ADDDFF2227643D80030E466 /* SavedRecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDDFF1227643D80030E466 /* SavedRecordingsViewController.swift */; };
 		1AEA1FE7226CEA3A0071E314 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AEA1FE6226CEA3A0071E314 /* GoogleService-Info.plist */; };
 		E5906AC4A311CF14DFEFF082 /* Pods_VoiceMorph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7C9680A36E4CEAB08255EF /* Pods_VoiceMorph.framework */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		1A793528226B746F008FC1C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A79352E226BDADA008FC1C7 /* PlayEffectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayEffectsViewController.swift; sourceTree = "<group>"; };
 		1A793530226BF44C008FC1C7 /* PlayEffectsViewController+Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayEffectsViewController+Audio.swift"; sourceTree = "<group>"; };
+		1ADDDFF1227643D80030E466 /* SavedRecordingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecordingsViewController.swift; sourceTree = "<group>"; };
 		1AEA1FE6226CEA3A0071E314 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA7C9680A36E4CEAB08255EF /* Pods_VoiceMorph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceMorph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5819907EA5DE317DCC2B75 /* Pods-VoiceMorph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceMorph.release.xcconfig"; path = "Target Support Files/Pods-VoiceMorph/Pods-VoiceMorph.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				1A79352E226BDADA008FC1C7 /* PlayEffectsViewController.swift */,
 				1A793530226BF44C008FC1C7 /* PlayEffectsViewController+Audio.swift */,
 				1AEA1FE6226CEA3A0071E314 /* GoogleService-Info.plist */,
+				1ADDDFF1227643D80030E466 /* SavedRecordingsViewController.swift */,
 			);
 			path = VoiceMorph;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				1A793532226BF5A2008FC1C7 /* PlayEffectsViewController+Audio.swift in Sources */,
 				1A79351F226B746C008FC1C7 /* RecordAudioViewController.swift in Sources */,
 				1A79351D226B746C008FC1C7 /* AppDelegate.swift in Sources */,
+				1ADDDFF2227643D80030E466 /* SavedRecordingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

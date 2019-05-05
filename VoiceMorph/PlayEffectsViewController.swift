@@ -8,7 +8,8 @@
 
 import UIKit
 import AVFoundation
-
+import Firebase
+import FirebaseStorage
 class PlayEffectsViewController: UIViewController {
     
     @IBOutlet weak var snailButton: UIButton!
@@ -49,6 +50,11 @@ class PlayEffectsViewController: UIViewController {
         }
         
         configureUI(.playing)
+    }
+    
+    
+    func saveRecording() {
+        
     }
     
     @IBAction func stopButtonPressed(_ sender: AnyObject) {
