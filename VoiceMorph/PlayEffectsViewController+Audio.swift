@@ -146,7 +146,7 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                 print(length)
                 print("**************************")
 
-                if (newAudio.length) < length {//Let us know when to stop saving the file, otherwise saving infinitely
+                if ((newAudio.length) < ((length * 2) - 20000)) {//Let us know when to stop saving the file, otherwise saving infinitely
 
                     do {
                         //print(buffer)
@@ -159,6 +159,11 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                 }else{
                     self.audioEngine.mainMixerNode.removeTap(onBus: 0)//if we dont remove it, will keep on tapping infinitely
                     print("got to before saving");
+                    
+                    let databaseRef = Database.database().reference().child("sounds")
+                    
+                    databaseRef.childByAutoId().setValue(["name" : recordingName])
+                    
                     let storageRef = Storage.storage().reference().child("sounds")
 
 
@@ -168,6 +173,7 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                         print(metadata ?? "NO METADATA")
                         print(error ?? "NO ERROR")
                     }
+                    
                   
                     //DO WHAT YOU WANT TO DO HERE WITH EFFECTED AUDIO
 

@@ -53,7 +53,7 @@ class SavedRecordingsViewController: UIViewController, UITableViewDelegate, UITa
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Number of rows to be listed in my score ranking
+        // Number of rows to be listed for my recordings
 
         return arr.count;
     }
