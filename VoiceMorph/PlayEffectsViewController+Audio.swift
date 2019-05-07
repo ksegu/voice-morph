@@ -73,16 +73,24 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
         reverbNode.wetDryMix = 50
         audioEngine.attach(reverbNode)
         
+        let audioMixer = audioEngine.mainMixerNode
+       // audioEngine.attach(audioMixer)
+        
         // connect nodes
         if echo == true && reverb == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, reverbNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, reverbNode, audioMixer, audioEngine.outputNode)
+//            connectAudioNodes(audioMixer, changeRatePitchNode, echoNode, reverbNode, audioEngine.outputNode)
         } else if echo == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, audioMixer, audioEngine.outputNode)
+//            connectAudioNodes(audioMixer, changeRatePitchNode, echoNode, audioEngine.outputNode)
         } else if reverb == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, reverbNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, reverbNode,audioMixer, audioEngine.outputNode)
+//            connectAudioNodes(audioMixer, changeRatePitchNode, reverbNode, audioEngine.outputNode)
         } else {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, audioMixer, audioEngine.outputNode)
+//            connectAudioNodes(audioMixer, changeRatePitchNode, audioEngine.outputNode)
         }
+      // connectAudioNodes(audioMixer, audioEngine.outputNode)
         
         // schedule to play and start the engine!
         audioPlayerNode.stop()
@@ -107,67 +115,67 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
         do {
             try audioEngine.start()
            
-//            let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-//
-////            let tmpFileUrl: NSURL = NSURL.fileURL(withPath: dirPaths.appendingPathComponent("effectedSound2.wav")) as NSURL
-//         // var  filteredOutputURL = tmpFileUrl
-//            print(dirPath);
-//            let recordingName = "/effectedSound2.wav";
-//            let pathArray = [dirPath , recordingName]
-//            //
-//                                   let loc = pathArray.joined(separator: "/")
-//
-//            let filePath = URL(string: pathArray.joined(separator: "/"))!
-//            print(loc)
-//            let tmpFileUrl: NSURL = NSURL(fileURLWithPath: loc + recordingName);
-//            let newAudio = try! AVAudioFile(forWriting: tmpFileUrl as URL, settings:  [
-//                AVFormatIDKey: NSNumber(value:kAudioFormatAppleLossless),
-//                AVEncoderAudioQualityKey : AVAudioQuality.low.rawValue,
-//                AVEncoderBitRateKey : 320000,
-//                AVNumberOfChannelsKey: 2,
-//                AVSampleRateKey : 44100.0
-//                ]);
-//            let length = self.audioFile.length
-//           audioEngine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: self.audioEngine.mainMixerNode.inputFormat(forBus: 0)) {
-//              (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
-//
-//
-//                print(newAudio.length)
-//                print("=====================")
-//                print(length)
-//                print("**************************")
-//
-//                if (newAudio.length) < length {//Let us know when to stop saving the file, otherwise saving infinitely
-//
-//                    do{
-//                        //print(buffer)
-//                        try newAudio.write(from: buffer)
-//
-//
-//                    }catch _{
-//                        print("Problem Writing Buffer")
-//                    }
-//                }else{
-//                    self.audioEngine.mainMixerNode.removeTap(onBus: 0)//if we dont remove it, will keep on tapping infinitely
-//                    let storageRef = Storage.storage().reference().child("sounds")
-//
-//
-//                    let uploadRef = storageRef.child(recordingName)
-//                    let uploadTask = uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
-//                        print("UPLOAD TASK FINISHED")
-//                        print(metadata ?? "NO METADATA")
-//                        print(error ?? "NO ERROR")
-//                    }
-//                    uploadTask.observe(.progress) { (snapshot) in
-//                        print(snapshot.progress ?? "no more progress")
-//                    }
-//                    //DO WHAT YOU WANT TO DO HERE WITH EFFECTED AUDIO
-//
-//                }
-//
-//            }
-//
-//
+            let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+
+            print(dirPath);
+            let recordingName = "effect" + NSUUID().uuidString + ".wav";
+            let pathArray = [dirPath , recordingName]
+            //
+            let loc = pathArray.joined(separator: "/")
+
+          //  let filePath = URL(string: pathArray.joined(separator: "/"))!
+            print(loc)
+            let tmpFileUrl: NSURL = NSURL(fileURLWithPath: loc);
+            let newAudio = try AVAudioFile(forWriting: tmpFileUrl as URL, settings:  [
+                AVFormatIDKey: NSNumber(value:kAudioFormatLinearPCM),
+                AVEncoderAudioQualityKey : AVAudioQuality.low.rawValue,
+                AVEncoderBitRateKey : 320000,
+                AVNumberOfChannelsKey: 2,
+                AVSampleRateKey : 44100.0
+                ]);
+            print("newAudio created");
+            let length = self.audioFile.length
+            //let myPath = RecordAudioViewController.loc;
+           
+           audioEngine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: self.audioEngine.mainMixerNode.inputFormat(forBus: 0)) {
+              (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
+
+
+                print(newAudio.length)
+                print("=====================")
+                print(length)
+                print("**************************")
+
+                if (newAudio.length) < length {//Let us know when to stop saving the file, otherwise saving infinitely
+
+                    do {
+                        //print(buffer)
+                        try newAudio.write(from: buffer)
+
+
+                    }catch _{
+                        print("Problem Writing Buffer")
+                    }
+                }else{
+                    self.audioEngine.mainMixerNode.removeTap(onBus: 0)//if we dont remove it, will keep on tapping infinitely
+                    print("got to before saving");
+                    let storageRef = Storage.storage().reference().child("sounds")
+
+
+                    let uploadRef = storageRef.child(recordingName)
+                    let uploadTask = uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
+                        print("UPLOAD TASK FINISHED")
+                        print(metadata ?? "NO METADATA")
+                        print(error ?? "NO ERROR")
+                    }
+                  
+                    //DO WHAT YOU WANT TO DO HERE WITH EFFECTED AUDIO
+
+                }
+
+            }
+
+
         } catch {
             showAlert(Alerts.AudioEngineError, message: String(describing: error))
             return
