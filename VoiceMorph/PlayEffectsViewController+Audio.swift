@@ -155,11 +155,11 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
             }
                 // fase case
             else if(rate != nil && rate == 1.5) {
-                recTill = (length/2 + 10000);
+                recTill = (length/2 + 6500);
             }
                 // all other cases
             else {
-                recTill = (length/2 + length/2 - 7000);
+                recTill = (length - 6500);
             }
                 if ((newAudio.length) < recTill) {//Let us know when to stop saving the file, otherwise saving infinitely
 
