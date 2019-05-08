@@ -63,34 +63,37 @@ class SavedRecordingsViewController: UIViewController, UITableViewDelegate, UITa
 
         let soundCell = tableView.dequeueReusableCell(withIdentifier: "soundCell", for: indexPath)
         
-        
         soundCell.textLabel!.text = arr[indexPath.row]
         
-                let currentDateTime = NSDate()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "MM-dd-yyyy"
         
-       // formatter.string(from: currentDateTime as Date)
-        soundCell.detailTextLabel!.text = formatter.string(from: currentDateTime as Date)
+        let dataRef = Database.database().reference().queryOrdered(byChild: "sounds")
+        
+        var found = false;
+        
+        dataRef.observeSingleEvent(of: .childAdded) { (snapshot) in
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot,
+                    let dict = childSnapshot.value as? [String : Any] {
+                    if dict["name"] as? String == self.arr[indexPath.row] {
+                        if(dict["date"] != nil) {
+                            soundCell.detailTextLabel!.text = (dict["date"] as! String)
+                            found = true;
+                            print("retrieved OG date")
+                        }
 
-        
-       //  let uploadRef = RecordAudioViewController().getData()
-        
-//        storageRef.observe(CFStreamEventType.value,with:{(snapshot) in
-//            if snapshot.childrenCount > 0 {
-//                for audioFile in snapshot.children.allObjects as!CFStreamEventType {
-//
-//                }
-//            }
-//        })
-//
-//            uploadRef.observe(.progress) { (snapshot) in
-//                    print(snapshot.progress ?? "no more progress")
-//            }
-//
-//            uploadRef.resume()
-//
+                    }
+                }
+            }
 
+          //  self.table.reloadData()
+        }
+        // the object is not there with the date, set the label as todays date
+        if(found == false) {
+            let currentDateTime = NSDate()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM-dd-yyyy"
+            soundCell.detailTextLabel!.text = formatter.string(from: currentDateTime as Date)
+        }
         
         return soundCell
     }
@@ -102,14 +105,13 @@ class SavedRecordingsViewController: UIViewController, UITableViewDelegate, UITa
 
         let storageRef = Storage.storage().reference().child("sounds").child(nameOfFile)
         
-        
             storageRef.getData(maxSize: 128 * 1024 * 1024) { (data, error) in
                 if let error = error {
                     print(error)
                 } else {
                     
                     if let d = data {
-                        print("got data")
+                        print("got data for recording")
                         do {
                             try d.write(to: fileURL)
                             

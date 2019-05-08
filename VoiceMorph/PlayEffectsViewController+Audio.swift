@@ -141,18 +141,31 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
               (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
 
 
-                print(newAudio.length)
-                print("=====================")
-                print(length)
-                print("**************************")
-
-                if ((newAudio.length) < ((length * 2) - 20000)) {//Let us know when to stop saving the file, otherwise saving infinitely
+            print(newAudio.length)
+            print("=====================")
+            print(length)
+            print("**************************")
+            
+            var recTill :Int64;
+            // handle differently for each effect, need to test
+            
+            // slow case
+            if(rate != nil && rate == 0.5) {
+                 recTill = ((length * 2) - 20000);
+            }
+                // fase case
+            else if(rate != nil && rate == 1.5) {
+                recTill = (length/2 + 10000);
+            }
+                // all other cases
+            else {
+                recTill = (length/2 + length/2 - 7000);
+            }
+                if ((newAudio.length) < recTill) {//Let us know when to stop saving the file, otherwise saving infinitely
 
                     do {
                         //print(buffer)
                         try newAudio.write(from: buffer)
-
-
                     }catch _{
                         print("Problem Writing Buffer")
                     }
@@ -160,21 +173,43 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                     self.audioEngine.mainMixerNode.removeTap(onBus: 0)//if we dont remove it, will keep on tapping infinitely
                     print("got to before saving");
                     
-                    let databaseRef = Database.database().reference().child("sounds")
+                        
+//                    let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
+//
+//                    saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
                     
-                    databaseRef.childByAutoId().setValue(["name" : recordingName])
+                        
+                        let databaseRef = Database.database().reference().child("sounds")
+                        
+                        let curID = databaseRef.childByAutoId()
+                        
+                        
+                        let currentDateTime = NSDate()
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "MM-dd-yyyy"
+                        
+                        curID.setValue(["name" : recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
+                        
+                        
+                        
+                        let storageRef = Storage.storage().reference().child("sounds")
+                        
+                        
+                        let uploadRef = storageRef.child(recordingName)
+                        uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
+                            print("UPLOAD TASK FINISHED")
+                            print(metadata ?? "NO METADATA")
+                            print(error ?? "NO ERROR")
+                        }
+                        
+                   // }))
                     
-                    let storageRef = Storage.storage().reference().child("sounds")
-
-
-                    let uploadRef = storageRef.child(recordingName)
-                    let uploadTask = uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
-                        print("UPLOAD TASK FINISHED")
-                        print(metadata ?? "NO METADATA")
-                        print(error ?? "NO ERROR")
-                    }
+//               saveAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+//                        print("do nothing")
+//                    }))
                     
-                  
+                
+                                      
                     //DO WHAT YOU WANT TO DO HERE WITH EFFECTED AUDIO
 
                 }
@@ -189,6 +224,48 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
         
         // play the recording!
         audioPlayerNode.play()
+        
+     
+//        let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
+//
+//        saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
+//
+//
+//
+//            let databaseRef = Database.database().reference().child("sounds")
+//
+//            let curID = databaseRef.childByAutoId()
+//
+//
+//            let currentDateTime = NSDate()
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "MM-dd-yyyy"
+//
+//            curID.setValue(["name" : self.recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
+//
+//            let storageRef = Storage.storage().reference().child("sounds")
+//
+//            let uploadRef = storageRef.child(recordingName)
+//            self.uploadTask = uploadRef.putFile(from: URL(string: "file://" + self.loc)!, metadata: nil) { (metadata, error) in
+//                print("UPLOAD TASK FINISHED")
+//                print(metadata ?? "NO METADATA")
+//                print(error ?? "NO ERROR")
+//            }
+//
+//
+//            self.performSegue(withIdentifier: "stopRecording", sender: self.audioRecorder.url)
+//        }))
+//
+//        saveAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+//
+//
+//            self.performSegue(withIdentifier: "stopRecording", sender: self.audioRecorder.url)
+//        }))
+//
+//        present(saveAlert, animated: true, completion: nil)
+        
+    
+        
     }
     
     @objc func stopAudio() {

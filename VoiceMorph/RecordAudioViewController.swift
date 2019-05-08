@@ -38,7 +38,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view will appear called")
+        
         
     }
     
@@ -46,9 +46,6 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         return uploadTask!;
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//    }
 
     @IBAction func recordAudio(_ sender: Any) {
          recordingLabel.text = "Recording in Progress"
@@ -95,36 +92,30 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
             let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
             
             saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
-                //var ref: DatabaseReference!
-
-               // ref = Database.database().reference()
-                // _ = self.audioRecorder.url
-                //You'll get unique audioFile name
+                
                
 
                 let databaseRef = Database.database().reference().child("sounds")
                 
-                databaseRef.childByAutoId().setValue(["name" : self.recordingName])
+                let curID = databaseRef.childByAutoId()
+                
+                
                 let currentDateTime = NSDate()
                 let formatter = DateFormatter()
                 formatter.dateFormat = "MM-dd-yyyy"
-                databaseRef.childByAutoId().setValue(["date" :  formatter.string(from: currentDateTime as Date)])
                 
+                curID.setValue(["name" : self.recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
                 
                 let storageRef = Storage.storage().reference().child("sounds")
-//                let myMetadata  = StorageMetadata()
-//                metadata.contentType = "audio/wav"
+
                 let uploadRef = storageRef.child(self.recordingName)
                 self.uploadTask = uploadRef.putFile(from: URL(string: "file://" + self.loc)!, metadata: nil) { (metadata, error) in
-//                    print("UPLOAD TASK FINISHED")
-//                    print(metadata ?? "NO METADATA")
-//                    print(error ?? "NO ERROR")
+                    print("UPLOAD TASK FINISHED")
+                    print(metadata ?? "NO METADATA")
+                    print(error ?? "NO ERROR")
                 }
-                self.uploadTask?.observe(.progress) { (snapshot) in
-//                    print(snapshot.progress ?? "no more progress")
-                    
-                }
-//                uploadTask.observe(.progress) { (snapshot) in
+
+//                self.uploadTask?.observe(.progress) { (snapshot) in
 //                    print(snapshot.progress ?? "no more progress")
 //                }
 //
@@ -143,7 +134,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
             present(saveAlert, animated: true, completion: nil)
             
         } else {
-//            print("recording was not saved")
+            print("recording was not saved")
         }
     }
     
