@@ -174,33 +174,48 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                     print("got to before saving");
                     
                         
-//                    let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
-//
-//                    saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
+//      let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
+
+//     saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
+
+                        let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
+                        
+                        saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
+                            
+                            let databaseRef = Database.database().reference().child("sounds")
+                            
+                            let curID = databaseRef.childByAutoId()
+                            
+                            
+                            let currentDateTime = NSDate()
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "MM-dd-yyyy"
+                            
+                            curID.setValue(["name" : recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
+                            
+                            
+                            
+                            let storageRef = Storage.storage().reference().child("sounds")
+                            
+                            
+                            let uploadRef = storageRef.child(recordingName)
+                            uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
+                                print("UPLOAD TASK FINISHED")
+                                print(metadata ?? "NO METADATA")
+                                print(error ?? "NO ERROR")
+                            }
+                            
+                        }))
+                    
+                    saveAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+                        print("didnt save")
+                    }))
                     
                         
-                        let databaseRef = Database.database().reference().child("sounds")
-                        
-                        let curID = databaseRef.childByAutoId()
-                        
-                        
-                        let currentDateTime = NSDate()
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "MM-dd-yyyy"
-                        
-                        curID.setValue(["name" : recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
-                        
-                        
-                        
-                        let storageRef = Storage.storage().reference().child("sounds")
-                        
-                        
-                        let uploadRef = storageRef.child(recordingName)
-                        uploadRef.putFile(from: URL(string: "file://" + loc)!, metadata: nil) { (metadata, error) in
-                            print("UPLOAD TASK FINISHED")
-                            print(metadata ?? "NO METADATA")
-                            print(error ?? "NO ERROR")
-                        }
+                        self.present(saveAlert, animated: true)
+//                    }
+                    
+                    
                         
                    // }))
                     
