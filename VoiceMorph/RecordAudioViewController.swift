@@ -17,7 +17,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
-    
+    @IBOutlet weak var stopRecLabel: UILabel!
     
     var recordingName = "";
     var filePath = URL(string: "");
@@ -31,8 +31,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
             FirebaseApp.configure()
         }
         stopRecordingButton.isEnabled = false
-    
-
+        //stopRecLabel.textColor = UIColor.black
     }
     
     
@@ -48,8 +47,9 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     
 
     @IBAction func recordAudio(_ sender: Any) {
-         recordingLabel.text = "Recording in Progress"
-       stopRecordingButton.isEnabled = true
+        recordingLabel.text = "Recording in Progress"
+        //stopRecLabel.textColor = UIColor.white
+        stopRecordingButton.isEnabled = true
         recordButton.isEnabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String

@@ -41,7 +41,7 @@
                                             <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bIP-Dn-JUf"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Start Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2E-tc-dwz">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Start Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUo-fo-Fj7">
                                         <rect key="frame" x="10.5" y="284" width="171.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,15 +58,16 @@
                                             <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lr6-rf-79P"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUo-fo-Fj7">
-                                        <rect key="frame" x="37" y="494.5" width="118" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Stop Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2E-tc-dwz">
+                                        <rect key="frame" x="11" y="494.5" width="170" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="s2E-tc-dwz" firstAttribute="top" secondItem="pdq-UB-QVr" secondAttribute="bottom" constant="5" id="Ttn-cp-74K"/>
+                                    <constraint firstItem="VUo-fo-Fj7" firstAttribute="top" secondItem="pdq-UB-QVr" secondAttribute="bottom" constant="6" id="CbL-5I-goy"/>
+                                    <constraint firstItem="s2E-tc-dwz" firstAttribute="top" secondItem="V4f-wz-Btf" secondAttribute="bottom" constant="15" id="XAB-Rk-q9z"/>
                                     <constraint firstItem="pdq-UB-QVr" firstAttribute="centerX" secondItem="26t-yz-wG2" secondAttribute="centerX" id="xWR-bt-aKN"/>
                                 </constraints>
                             </stackView>
@@ -82,6 +83,7 @@
                     <connections>
                         <outlet property="recordButton" destination="pdq-UB-QVr" id="Aqj-lU-YMM"/>
                         <outlet property="recordingLabel" destination="VUo-fo-Fj7" id="Rdc-xf-h6O"/>
+                        <outlet property="stopRecLabel" destination="s2E-tc-dwz" id="hAP-L9-IA3"/>
                         <outlet property="stopRecordingButton" destination="V4f-wz-Btf" id="JXz-OE-Guk"/>
                         <segue destination="UHs-qS-qUN" kind="show" identifier="stopRecording" id="TOh-a6-K8w"/>
                     </connections>
