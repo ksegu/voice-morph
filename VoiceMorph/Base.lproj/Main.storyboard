@@ -71,10 +71,16 @@
                                     <constraint firstItem="pdq-UB-QVr" firstAttribute="centerX" secondItem="26t-yz-wG2" secondAttribute="centerX" id="xWR-bt-aKN"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voice- Morph v1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJa-LV-AFw">
-                                <rect key="frame" x="3" y="67" width="95.5" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJa-LV-AFw">
+                                <rect key="frame" x="3" y="67" width="21" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voice Morph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1u-Ry-vdV">
+                                <rect key="frame" x="106" y="80" width="167" height="40"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoSCITCTT-Book" family="Bodoni 72 Smallcaps" pointSize="33"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -83,6 +89,8 @@
                             <constraint firstItem="26t-yz-wG2" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="7hq-Da-GC8"/>
                             <constraint firstItem="26t-yz-wG2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="SYd-Ua-vMs"/>
                             <constraint firstItem="zJa-LV-AFw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="3" id="hiR-Qs-FNC"/>
+                            <constraint firstItem="J1u-Ry-vdV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="i1t-Fp-lML"/>
+                            <constraint firstItem="J1u-Ry-vdV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pTb-AW-AGu"/>
                             <constraint firstItem="zJa-LV-AFw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="pdT-tA-eDA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -182,12 +190,23 @@
                                     <action selector="stopButtonPressed:" destination="UHs-qS-qUN" eventType="touchUpInside" id="eNw-xr-yye"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voice Morph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0p-it-qcV">
+                                <rect key="frame" x="104" y="80" width="167" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="167" id="h3m-t8-C5K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoSCITCTT-Book" family="Bodoni 72 Smallcaps" pointSize="33"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cPF-Vn-6FG" firstAttribute="centerX" secondItem="8rz-nv-zn7" secondAttribute="centerX" id="7gn-wB-ssm"/>
+                            <constraint firstItem="l0p-it-qcV" firstAttribute="centerX" secondItem="8rz-nv-zn7" secondAttribute="centerX" id="IKk-as-Kki"/>
                             <constraint firstItem="G3d-zJ-gt5" firstAttribute="top" secondItem="8rz-nv-zn7" secondAttribute="top" constant="50" id="gnK-eL-MCv"/>
                             <constraint firstItem="G3d-zJ-gt5" firstAttribute="centerX" secondItem="8rz-nv-zn7" secondAttribute="centerX" id="hNP-xM-PwH"/>
+                            <constraint firstItem="l0p-it-qcV" firstAttribute="top" secondItem="8rz-nv-zn7" secondAttribute="top" constant="16" id="k0X-Ph-67t"/>
                             <constraint firstItem="8rz-nv-zn7" firstAttribute="bottom" secondItem="G3d-zJ-gt5" secondAttribute="bottom" constant="200" id="lWH-Uj-xXx"/>
                             <constraint firstItem="G3d-zJ-gt5" firstAttribute="leading" secondItem="8rz-nv-zn7" secondAttribute="leading" id="tG8-MW-zIn"/>
                             <constraint firstItem="8rz-nv-zn7" firstAttribute="bottom" secondItem="cPF-Vn-6FG" secondAttribute="bottom" constant="44" id="vEq-kC-qC9"/>

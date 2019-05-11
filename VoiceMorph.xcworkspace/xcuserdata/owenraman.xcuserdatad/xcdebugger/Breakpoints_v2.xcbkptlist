@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VoiceMorph/RecordAudioViewController.swift"
+            timestampString = "579231901.791183"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "RecordAudioViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoiceMorph.RecordAudioViewController.recordingLabel.getter : weak Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "VoiceMorph"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owenraman/Documents/ios/voice-morph/VoiceMorph/RecordAudioViewController.swift"
+                  timestampString = "579231815.705848"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoiceMorph.RecordAudioViewController.recordingLabel.setter : weak Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "VoiceMorph"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owenraman/Documents/ios/voice-morph/VoiceMorph/RecordAudioViewController.swift"
+                  timestampString = "579231815.710939"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoiceMorph.RecordAudioViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; VoiceMorph.RecordAudioViewController"
+                  moduleName = "VoiceMorph"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owenraman/Documents/ios/voice-morph/VoiceMorph/RecordAudioViewController.swift"
+                  timestampString = "579231815.7163481"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "169">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoiceMorph.RecordAudioViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;VoiceMorph.RecordAudioViewController&gt;"
+                  moduleName = "VoiceMorph"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/owenraman/Documents/ios/voice-morph/VoiceMorph/RecordAudioViewController.swift"
+                  timestampString = "579231815.721487"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "138">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
