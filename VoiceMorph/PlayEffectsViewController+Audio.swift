@@ -118,15 +118,27 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
             let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 
             print(dirPath);
-            let recordingName = "effect" + NSUUID().uuidString + ".wav";
+            
+//            let dataRef =  Database.database().reference().child("sounds")
+//
+//            var count: UInt = 0;
+//
+//            dataRef.observe(.value, with: { (snapshot: DataSnapshot!) in
+//                print("Got snapshot");
+//               // print(snapshot.childrenCount)
+//                count = snapshot.childrenCount
+//            })
+//            print(count)
+            
+            let recordingName = "effect" + "Recording" + NSUUID().uuidString + ".wav";
             let pathArray = [dirPath , recordingName]
             //
             let loc = pathArray.joined(separator: "/")
 
           //  let filePath = URL(string: pathArray.joined(separator: "/"))!
             print(loc)
-            let tmpFileUrl: NSURL = NSURL(fileURLWithPath: loc);
-            let newAudio = try AVAudioFile(forWriting: tmpFileUrl as URL, settings:  [
+            let fileLoc: NSURL = NSURL(fileURLWithPath: loc);
+            let newAudio = try AVAudioFile(forWriting: fileLoc as URL, settings:  [
                 AVFormatIDKey: NSNumber(value:kAudioFormatLinearPCM),
                 AVEncoderAudioQualityKey : AVAudioQuality.low.rawValue,
                 AVEncoderBitRateKey : 320000,
@@ -159,7 +171,7 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
             }
                 // all other cases
             else {
-                recTill = (length - 6500);
+                recTill = (length - 7500);
             }
                 if ((newAudio.length) < recTill) {//Let us know when to stop saving the file, otherwise saving infinitely
 
@@ -173,10 +185,6 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                     self.audioEngine.mainMixerNode.removeTap(onBus: 0)//if we dont remove it, will keep on tapping infinitely
                     print("got to before saving");
                     
-                        
-//      let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
-
-//     saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
 
                         let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
                         
@@ -211,20 +219,8 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
                         print("didnt save")
                     }))
                     
-                        
                         self.present(saveAlert, animated: true)
-//                    }
-                    
-                    
-                        
-                   // }))
-                    
-//               saveAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
-//                        print("do nothing")
-//                    }))
-                    
-                
-                                      
+
                     //DO WHAT YOU WANT TO DO HERE WITH EFFECTED AUDIO
 
                 }
@@ -239,48 +235,7 @@ extension PlayEffectsViewController: AVAudioPlayerDelegate {
         
         // play the recording!
         audioPlayerNode.play()
-        
-     
-//        let saveAlert = UIAlertController(title: "SaveInitialRec", message: "Would you like to save the current recording?", preferredStyle: UIAlertController.Style.alert)
-//
-//        saveAlert.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { (action: UIAlertAction!) in
-//
-//
-//
-//            let databaseRef = Database.database().reference().child("sounds")
-//
-//            let curID = databaseRef.childByAutoId()
-//
-//
-//            let currentDateTime = NSDate()
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "MM-dd-yyyy"
-//
-//            curID.setValue(["name" : self.recordingName , "date" : formatter.string(from: currentDateTime as Date)]);
-//
-//            let storageRef = Storage.storage().reference().child("sounds")
-//
-//            let uploadRef = storageRef.child(recordingName)
-//            self.uploadTask = uploadRef.putFile(from: URL(string: "file://" + self.loc)!, metadata: nil) { (metadata, error) in
-//                print("UPLOAD TASK FINISHED")
-//                print(metadata ?? "NO METADATA")
-//                print(error ?? "NO ERROR")
-//            }
-//
-//
-//            self.performSegue(withIdentifier: "stopRecording", sender: self.audioRecorder.url)
-//        }))
-//
-//        saveAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
-//
-//
-//            self.performSegue(withIdentifier: "stopRecording", sender: self.audioRecorder.url)
-//        }))
-//
-//        present(saveAlert, animated: true, completion: nil)
-        
     
-        
     }
     
     @objc func stopAudio() {

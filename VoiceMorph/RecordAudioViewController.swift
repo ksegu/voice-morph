@@ -48,13 +48,26 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBAction func recordAudio(_ sender: Any) {
         recordingLabel.text = "Recording in Progress"
-        //stopRecLabel.textColor = UIColor.white
+       
         stopRecordingButton.isEnabled = true
         recordButton.isEnabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-
-        recordingName = NSUUID().uuidString + ".wav";
+        
+//      let dataRef =  Database.database().reference().child("sounds")
+//        
+//        var count: UInt = 0;
+//        
+//        dataRef.observe(.value, with: { (snapshot: DataSnapshot!) in
+//            print("Got snapshot");
+//            print(snapshot.childrenCount)
+//            count = snapshot.childrenCount
+//        })
+//        
+//        
+//        print("count after parse is" + String(count));
+        
+        recordingName = "recording" + NSUUID().uuidString + ".wav";
         
         // recordingName = "recordedAudio.wav";
         let pathArray = [dirPath, recordingName]
